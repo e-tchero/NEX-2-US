@@ -3,7 +3,7 @@ import type { NextRequest } from "next/server";
 import { checkRateLimit, detectBot, getRequestCost } from "@/lib/rate-limit";
 
 /**
- * Security Middleware
+ * Security Proxy (Next.js 16)
  * 
  * Implements:
  * - Rate limiting
@@ -14,6 +14,7 @@ import { checkRateLimit, detectBot, getRequestCost } from "@/lib/rate-limit";
  */
 
 // Public routes that don't require authentication
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const PUBLIC_ROUTES = [
   "/",
   "/api/health",
@@ -29,10 +30,10 @@ const RATE_LIMIT_EXEMPT_ROUTES = [
   "/favicon.ico",
 ];
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip middleware for static assets and Next.js internals
+  // Skip proxy for static assets and Next.js internals
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/static") ||
@@ -77,6 +78,7 @@ export async function middleware(request: NextRequest) {
 
   // 4. Rate Limiting
   if (!RATE_LIMIT_EXEMPT_ROUTES.some((route) => pathname.startsWith(route))) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const cost = getRequestCost(pathname, request.method);
     
     // TODO: Get user info from session/token
@@ -245,7 +247,7 @@ function logRequest(request: NextRequest): void {
   }
 }
 
-// Configure which paths the middleware runs on
+// Configure which paths the proxy runs on
 export const config = {
   matcher: [
     /*

@@ -51,7 +51,7 @@ Build your community and share knowledge:
 ## 🧱 Tech Stack
 
 ### Frontend
-- **Framework:** Next.js 14 (App Router)
+- **Framework:** Next.js 16 (App Router)
 - **Language:** TypeScript
 - **Styling:** Tailwind CSS v4
 - **Icons:** Lucide React
@@ -168,7 +168,7 @@ This project uses:
 - [x] Next.js setup with TypeScript
 - [x] Tailwind CSS configuration
 - [ ] Basic UI component library
-- [ ] Landing page design
+- [x] Landing page design
 - [ ] Responsive navigation
 
 ### Phase 2: Core Features
